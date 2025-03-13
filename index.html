@@ -94,7 +94,7 @@
     <div class="file-input-wrapper">
         <button class="file-input">파일 선택하기<input type="file" id="fileInput" accept="image/*"></button>
     </div>
-    <button class="button" onclick="saveImage()">이미지 저장하기</button>
+    <button class="button" id="saveButton">이미지 저장하기</button>
 
     <script>
         document.getElementById('fileInput').addEventListener('change', function(event) {
@@ -112,20 +112,22 @@
             }
         });
 
-        function saveImage() {
+        document.getElementById('saveButton').addEventListener('click', function() {
             const card = document.getElementById('card');
             html2canvas(card).then(canvas => {
                 const link = document.createElement('a');
-                link.download = 'image.png';
-                link.href = canvas.toDataURL();
+                link.download = 'final_image.png';
+                link.href = canvas.toDataURL('image/png');
+                document.body.appendChild(link);
                 link.click();
+                document.body.removeChild(link);
                 alert('저장이 완료되었습니다.');
             }).catch(error => {
                 alert('저장이 실패했습니다.');
                 console.error('Error saving image:', error);
             });
-        }
+        });
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </body>
 </html>
