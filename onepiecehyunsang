@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Example</title>
+    <style>
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 300px;
+            margin: auto;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        .card img {
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            width: 100%;
+        }
+        .card p {
+            padding: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>이미지 예제</h1>
+    <div class="card">
+        <img id="selectedImage" src="basebase.jpg" alt="선택한 이미지">
+        <p>아래는 선택한 이미지입니다:</p>
+    </div>
+    <input type="file" id="fileInput">
+    <button onclick="saveImage()">이미지 저장하기</button>
+
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('selectedImage').src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+
+        function saveImage() {
+            const link = document.createElement('a');
+            link.href = document.getElementById('selectedImage').src;
+            link.download = 'saved_image.jpg';
+            link.click();
+        }
+    </script>
+</body>
+</html>
