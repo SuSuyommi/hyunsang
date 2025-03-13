@@ -119,6 +119,10 @@
                 link.download = 'image.png';
                 link.href = canvas.toDataURL();
                 link.click();
+                alert('저장이 완료되었습니다.');
+            }).catch(error => {
+                alert('저장이 실패했습니다.');
+                console.error('Error saving image:', error);
             });
         }
     </script>
